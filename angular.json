@@ -35,6 +35,95 @@
           }
         }
       }
+    },
+    "glassify-testbed-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/glassify-testbed-app",
+      "sourceRoot": "projects/glassify-testbed-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/glassify-testbed-app",
+            "index": "projects/glassify-testbed-app/src/index.html",
+            "browser": "projects/glassify-testbed-app/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/glassify-testbed-app/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/glassify-testbed-app/public"
+              }
+            ],
+            "styles": [
+              "projects/glassify-testbed-app/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "glassify-testbed-app:build:production"
+            },
+            "development": {
+              "buildTarget": "glassify-testbed-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/glassify-testbed-app/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/glassify-testbed-app/public"
+              }
+            ],
+            "styles": [
+              "projects/glassify-testbed-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   }
 }
